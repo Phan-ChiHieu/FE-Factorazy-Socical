@@ -9,7 +9,7 @@ type HomeLayoutT = {
 
 export default function HomeLayoutView({ children }: HomeLayoutT) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1, backgroundColor: '#000' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
       <Header />
       <Box
         component="main"
