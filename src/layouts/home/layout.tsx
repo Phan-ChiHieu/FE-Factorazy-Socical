@@ -12,9 +12,16 @@ export default function HomeLayout({ children }: HomeLayoutT) {
   const theme = useTheme();
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1, backgroundColor: '#000' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1, backgroundColor: theme.palette.background.default }}>
       <Header />
-      {children}
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+        }}
+      >
+        {children}
+      </Box>
       <Footer />
     </Box>
   );

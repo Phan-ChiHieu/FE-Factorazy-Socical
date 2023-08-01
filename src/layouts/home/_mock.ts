@@ -12,3 +12,8 @@ export const TITLE_HEADER = {
     href: '/register',
   },
 };
+
+export const HEADER = {
+  H_MOBILE: 36,
+  H_DESKTOP: 56,
+};
