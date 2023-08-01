@@ -16,6 +16,7 @@ declare module '@mui/material/styles/createPalette' {
       background: {
         default: string;
         paper: string;
+        transparent: string;
       };
       line: {
         default: string;
@@ -29,13 +30,14 @@ const COMMON = {
   factorazy: {
     text: {
       default: '#000000',
-      pager: '#FFFFFF',
+      paper: '#FFFFFF',
       info: '#2DC0AC',
       placeholder: '#667085',
     },
     background: {
       default: '#FFFCF6',
       paper: '#FFFFFF',
+      transparent: 'transparent',
     },
     line: {
       default: '#FFFCF6',

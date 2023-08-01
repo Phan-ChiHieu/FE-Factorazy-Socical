@@ -44,6 +44,10 @@ export function cssBaseline(theme: Theme) {
           display: 'inline-block',
           verticalAlign: 'bottom',
         },
+        a: {
+          textDecoration: 'none',
+          color: theme.palette.factorazy.text.default,
+        },
       },
     },
   };

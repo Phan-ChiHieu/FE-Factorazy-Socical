@@ -18,4 +18,10 @@ export const typography = {
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,
   fontWeightBold: 700,
-};
+
+  // font small
+  subtitle1: {
+    fontSize: '14px',
+    fontWeight: 500,
+  },
+} as const;
