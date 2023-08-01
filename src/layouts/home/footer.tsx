@@ -3,11 +3,10 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { useTheme } from '@mui/material/styles';
+import Link from 'next/link';
 import React from 'react';
 
 export default function Footer() {
-  const theme = useTheme();
   return (
     <Box
       component="footer"
@@ -25,10 +24,16 @@ export default function Footer() {
             </div>
             <div>US</div>
           </Stack>
-          <Stack direction="row" alignItems="center" spacing={1}>
-            <div>Item_1</div>
-            <div>Item_2</div>
-            <div>Item_3</div>
+          <Stack direction="row" alignItems="center" gap="18px">
+            <Typography component={Link} href="/dashboard" variant="subtitle1">
+              Terms and Conditions
+            </Typography>
+            <Typography component={Link} href="/dashboard" variant="subtitle1">
+              Privacy Policy
+            </Typography>
+            <Typography component={Link} href="/dashboard" variant="subtitle1">
+              Support
+            </Typography>
           </Stack>
         </Stack>
       </Container>

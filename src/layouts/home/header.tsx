@@ -3,14 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Stack from '@mui/system/Stack';
-import { useTheme } from '@mui/material/styles';
-import Link from '@mui/material/Link';
-import { RouterLink } from '@/routes/components';
+import Typography from '@mui/material/Typography';
 import { HEADER, TITLE_HEADER } from './_mock';
+import Link from 'next/link';
 
 export default function Header() {
-  const theme = useTheme();
-
   return (
     <AppBar>
       <Toolbar
@@ -27,59 +24,45 @@ export default function Header() {
             direction="row"
             justifyContent="space-between"
             sx={{
-              color: theme.palette.factorazy.text.default,
+              color: '#000',
               width: 1,
             }}
           >
-            <Link
-              component={RouterLink}
-              underline="none"
-              sx={{
-                color: theme.palette.factorazy.text.paper,
-                textTransform: 'uppercase',
-                fontSize: theme.typography.subtitle1,
-              }}
+            <Typography
+              variant="subtitle1"
+              component={Link}
               href={TITLE_HEADER.manufacturing.href}
+              color="#fff"
+              position="relative"
+              pr="18px"
+              textTransform="uppercase"
             >
               {TITLE_HEADER.manufacturing.value}
-            </Link>
+            </Typography>
             <Stack direction="row" spacing="18px">
-              <Link
-                component={RouterLink}
-                underline="none"
-                sx={{
-                  color: theme.palette.factorazy.text.paper,
-                  textTransform: 'uppercase',
-                  fontSize: theme.typography.subtitle1,
-                  position: 'relative',
-                  paddingRight: '18px',
-                  '&:after': {
-                    content: '""',
-                    display: 'block',
-                    width: '1px',
-                    height: '100%',
-                    backgroundColor: theme.palette.factorazy.background.paper,
-                    position: 'absolute',
-                    right: 0,
-                    bottom: 0,
-                  },
-                }}
+              <Typography
+                variant="subtitle1"
+                component={Link}
                 href={TITLE_HEADER.signIn.href}
+                color="#fff"
+                position="relative"
+                pr="18px"
+                textTransform="uppercase"
               >
                 {TITLE_HEADER.signIn.value}
-              </Link>
-              <Link
-                component={RouterLink}
-                underline="none"
-                sx={{
-                  color: theme.palette.factorazy.text.paper,
-                  textTransform: 'uppercase',
-                  fontSize: theme.typography.subtitle1,
-                }}
+              </Typography>
+
+              <Typography
+                variant="subtitle1"
+                component={Link}
                 href={TITLE_HEADER.register.href}
+                color="#fff"
+                position="relative"
+                pr="18px"
+                textTransform="uppercase"
               >
                 {TITLE_HEADER.register.value}
-              </Link>
+              </Typography>
             </Stack>
           </Stack>
         </Container>

@@ -1,15 +1,111 @@
-'use client';
-
-import HomeLayout from '@/layouts/home';
-// import { useTheme } from '@mui/material/styles';
-import Box from '@mui/system/Box';
+import Stack from '@mui/material/Stack';
+import Box, { positions } from '@mui/system/Box';
 import React from 'react';
+import Image from 'next/image';
+import { bgGradient } from '@/theme/css';
+import LogoIcon from '@/assets/icons/logo-icon';
+
+// iamges
+import BannerMain from '/public/assets/images/home/banner-main.jpg';
+import Typography from '@mui/material/Typography';
+import SearchView from './components/search-view';
+
 
 const HomeView = () => {
   return (
-    <HomeLayout>
-      <Box>HomeView</Box>
-    </HomeLayout>
+    <Stack
+      sx={{
+        color: '#fff',
+        height: '100%',
+      }}
+    >
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+        }}
+      >
+        <Box
+          sx={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#000',
+            position: 'relative',
+            '&:after': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              ...bgGradient({
+                direction: '180deg',
+                startColor: 'rgba(8, 44, 42, 0.00) 0%',
+                endColor: '#071F1D 100%',
+              }),
+            },
+          }}
+        >
+          <Image
+            alt="factorazy-banner"
+            src={BannerMain}
+            placeholder="blur"
+            quality={100}
+            fill
+            style={{
+              objectFit: 'contain',
+            }}
+            priority
+          />
+          <Box
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 20
+            }}
+          >
+            <Stack
+              direction='row'
+              alignItems='center'
+              gap={3}
+            >
+              <div className='icon-factorazy'>
+                <LogoIcon />
+              </div>
+              <Box position='relative'>
+                <Image
+                  alt="factorazy-log-500"
+                  src="/assets/images/home/logo-500.svg"
+                  width={94}
+                  height={53}
+                  quality={100}
+                  priority
+                />
+              </Box>
+            </Stack>
+            <Stack direction='row' alignItems='center' pt='18px'>
+              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px'>Green-light</Typography>
+              <Typography textTransform='uppercase' fontWeight={400}>your journey to better products!</Typography>
+            </Stack>
+            {/* Start: Client Component */}
+            <SearchView />
+            {/* End: Client Component */}
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          color: '#000',
+        }}
+      >
+        HomeView-2
+      </Box>
+    </Stack >
   );
 };
 
