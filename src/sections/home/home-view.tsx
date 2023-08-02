@@ -17,6 +17,7 @@ const HomeView = () => {
       sx={{
         color: '#fff',
         height: '100%',
+        backgroundColor: '#FFFCF6'
       }}
     >
       <Box
@@ -30,7 +31,7 @@ const HomeView = () => {
           sx={{
             width: '100%',
             height: '100%',
-            backgroundColor: '#000',
+            backgroundColor: '#fff',
             position: 'relative',
             '&:after': {
               content: '""',
@@ -54,7 +55,7 @@ const HomeView = () => {
             quality={100}
             fill
             style={{
-              objectFit: 'contain',
+              objectFit: 'cover',
             }}
             priority
           />
@@ -69,7 +70,7 @@ const HomeView = () => {
           >
             <Stack
               direction='row'
-              alignItems='center'
+              alignItems='flex-end'
               gap={3}
             >
               <div className='icon-factorazy'>
@@ -87,12 +88,10 @@ const HomeView = () => {
               </Box>
             </Stack>
             <Stack direction='row' alignItems='center' pt='18px'>
-              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px'>Green-light</Typography>
-              <Typography textTransform='uppercase' fontWeight={400}>your journey to better products!</Typography>
+              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px' whiteSpace='nowrap'>Green-light</Typography>
+              <Typography textTransform='uppercase' fontWeight={400} whiteSpace='nowrap'>your journey to better products!</Typography>
             </Stack>
-            {/* Start: Client Component */}
             <SearchView />
-            {/* End: Client Component */}
           </Box>
         </Box>
       </Box>
@@ -102,9 +101,7 @@ const HomeView = () => {
           height: '100%',
           color: '#000',
         }}
-      >
-        HomeView-2
-      </Box>
+      />
     </Stack >
   );
 };
