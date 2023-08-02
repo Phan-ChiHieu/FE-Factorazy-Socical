@@ -8,8 +8,8 @@ export const TITLE_HEADER = {
     href: '/sign-in',
   },
   register: {
-    value: 'Register',
-    href: '/register',
+    value: 'Sign up',
+    href: '/sign-up',
   },
 };
 
