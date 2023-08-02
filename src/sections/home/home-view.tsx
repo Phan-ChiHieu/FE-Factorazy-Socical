@@ -30,7 +30,7 @@ const HomeView = () => {
           sx={{
             width: '100%',
             height: '100%',
-            backgroundColor: '#000',
+            backgroundColor: '#fff',
             position: 'relative',
             '&:after': {
               content: '""',
@@ -54,7 +54,7 @@ const HomeView = () => {
             quality={100}
             fill
             style={{
-              objectFit: 'contain',
+              objectFit: 'cover',
             }}
             priority
           />
@@ -69,7 +69,7 @@ const HomeView = () => {
           >
             <Stack
               direction='row'
-              alignItems='center'
+              alignItems='flex-end'
               gap={3}
             >
               <div className='icon-factorazy'>

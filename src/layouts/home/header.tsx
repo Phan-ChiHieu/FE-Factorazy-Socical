@@ -48,6 +48,17 @@ export default function Header() {
                 position="relative"
                 pr="18px"
                 textTransform="uppercase"
+                sx={{
+                  '&:after': {
+                    content: '""',
+                    position: 'absolute',
+                    width: '1px',
+                    height: '100%',
+                    top: 0,
+                    right: 0,
+                    backgroundColor: '#fff',
+                  }
+                }}
               >
                 {TITLE_HEADER.signIn.value}
               </Typography>
@@ -58,7 +69,6 @@ export default function Header() {
                 href={TITLE_HEADER.register.href}
                 color="#fff"
                 position="relative"
-                pr="18px"
                 textTransform="uppercase"
               >
                 {TITLE_HEADER.register.value}
