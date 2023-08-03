@@ -18,8 +18,8 @@ export default function Footer() {
     >
       <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" width={1}>
-          <Stack direction="row" alignItems="center" justifyContent='center' gap='6px'>
-            <Stack alignItems="center" justifyContent='center'>
+          <Stack direction="row" alignItems="center" justifyContent="center" gap="6px">
+            <Stack alignItems="center" justifyContent="center">
               <LocationIcon />
             </Stack>
             <div>VIETNAM</div>
