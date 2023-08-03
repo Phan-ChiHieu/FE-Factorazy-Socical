@@ -1,14 +1,16 @@
-'use client'
+'use client';
 
-import CameraIcon from '@/assets/icons/camera-icon'
-import SearchIcon from '@/assets/icons/search-icon'
-import Autocomplete from '@mui/material/Autocomplete'
-import InputAdornment from '@mui/material/InputAdornment'
-import TextField from '@mui/material/TextField'
-import Box from '@mui/system/Box'
-import React from 'react'
+import CameraIcon from '@/assets/icons/camera-icon';
+import SearchIcon from '@/assets/icons/search-icon';
+import Autocomplete from '@mui/material/Autocomplete';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/system/Box';
+import React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import Button from '@mui/material/Button';
+import ButtonBase from '@mui/material/ButtonBase';
+import Stack from '@mui/material/Stack';
 
 interface Film {
     title: string;
@@ -22,7 +24,6 @@ function sleep(delay = 0) {
 }
 
 export default function SearchView() {
-
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState<readonly Film[]>([]);
     const loading = open && options.length === 0;
@@ -55,19 +56,21 @@ export default function SearchView() {
 
     return (
         <>
-            <Box sx={{
-                marginTop: '24px',
-                backgroundColor: '#fff',
-                height: '44px',
-                borderRadius: '8px',
-                boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
-                position: 'relative',
-                zIndex: 50,
-                marginBottom: '-24px',
-                cursor: 'pointer',
-            }}>
+            <Box
+                sx={{
+                    marginTop: '24px',
+                    backgroundColor: '#fff',
+                    height: '44px',
+                    borderRadius: '8px',
+                    boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
+                    position: 'relative',
+                    zIndex: 50,
+                    marginBottom: '-24px',
+                    cursor: 'pointer',
+                }}
+            >
                 <Autocomplete
-                    size='small'
+                    size="small"
                     fullWidth
                     freeSolo
                     open={open}
@@ -81,40 +84,58 @@ export default function SearchView() {
                     getOptionLabel={(option: any) => option.title}
                     options={options}
                     loading={loading}
-                    renderInput={(params) => <TextField
-                        {...params}
-                        placeholder='Find Any Company’s Suppliers'
-                        InputProps={{
-                            ...params.InputProps,
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon />
-                                </InputAdornment>
-                            ),
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                                    <CameraIcon />
-                                    {params.InputProps.endAdornment}
-                                </InputAdornment>
-                            )
-                        }}
-                    />}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            placeholder="Find Any Company’s Suppliers"
+                            InputProps={{
+                                ...params.InputProps,
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                                        <CameraIcon />
+                                        {params.InputProps.endAdornment}
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    )}
                     renderOption={(props, option) => (
-                        <Box sx={{
-                            padding: '8px',
-                        }}>
-                            <Box component='li' px='10px' {...props} key={option.title}>
+                        <Box
+                            sx={{
+                                padding: '8px',
+                            }}
+                        >
+                            <Box component="li" px="10px" {...props} key={option.title}>
                                 {option.title}
                             </Box>
                         </Box>
                     )}
                 />
+                <Stack mt="24px" direction='row' justifyContent='center' alignItems='center'>
+                    <ButtonBase
+                        sx={{
+                            color: '#000',
+                            backgroundColor: '#EFF1EF',
+                            height: '44px',
+                            width: '182px',
+                            textTransform: 'uppercase',
+                            fontWeight: 500,
+                            borderRadius: '6px'
+                        }}
+                    >
+                        Search
+                    </ButtonBase>
+                </Stack>
             </Box>
         </>
-    )
+    );
 }
-
 
 const top100Films = [
     { title: 'The Shawshank Redemption', year: 1994 },
