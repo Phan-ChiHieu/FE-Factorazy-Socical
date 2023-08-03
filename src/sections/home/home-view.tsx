@@ -47,7 +47,7 @@ const HomeView = () => {
             },
           }}
         >
-          {/* <Image
+          <Image
             alt="factorazy-banner"
             src={BannerMain}
             placeholder="blur"
@@ -57,8 +57,8 @@ const HomeView = () => {
               objectFit: 'cover',
             }}
             priority
-          /> */}
-          <Box
+          />
+          {/* <Box
             component="img"
             alt="auth"
             src={'/assets/images/home/banner_main.jpg'}
@@ -70,7 +70,7 @@ const HomeView = () => {
               width: '100%',
               height: '100%',
             }}
-          />
+          /> */}
           <Box
             sx={{
               position: 'absolute',

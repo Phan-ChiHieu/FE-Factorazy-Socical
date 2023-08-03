@@ -2,9 +2,6 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 // utils
 import { fetcher, endpoints, fetcherHidden, fetcherServer } from 'src/utils/axios';
-import { useSearchParams } from 'next/navigation';
-
-//   const { data: dataListSuggest, isLoading: isLoadingListSuggest } = useSWR(endpoints.home.getSuggest, fetcherHidden);
 
 // ----------------------------------------------------------------------
 

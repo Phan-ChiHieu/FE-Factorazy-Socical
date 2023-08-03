@@ -31,9 +31,11 @@
     "lodash": "^4.17.21",
     "@iconify/react": "^4.1.1",
     "swr": "^2.2.0",
-    "axios": "^1.4.0"
+    "axios": "^1.4.0",
+    "autosuggest-highlight": "^3.3.4"
   },
   "devDependencies": {
+    "@types/autosuggest-highlight": "^3.2.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "prettier": "^3.0.0",
