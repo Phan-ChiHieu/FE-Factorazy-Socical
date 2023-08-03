@@ -17,6 +17,7 @@ const HomeView = () => {
       sx={{
         color: '#fff',
         height: '100%',
+        backgroundColor: '#FFFCF6'
       }}
     >
       <Box
@@ -87,12 +88,10 @@ const HomeView = () => {
               </Box>
             </Stack>
             <Stack direction='row' alignItems='center' pt='18px'>
-              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px'>Green-light</Typography>
-              <Typography textTransform='uppercase' fontWeight={400}>your journey to better products!</Typography>
+              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px' whiteSpace='nowrap'>Green-light</Typography>
+              <Typography textTransform='uppercase' fontWeight={400} whiteSpace='nowrap'>your journey to better products!</Typography>
             </Stack>
-            {/* Start: Client Component */}
             <SearchView />
-            {/* End: Client Component */}
           </Box>
         </Box>
       </Box>
@@ -102,9 +101,7 @@ const HomeView = () => {
           height: '100%',
           color: '#000',
         }}
-      >
-        HomeView-2
-      </Box>
+      />
     </Stack >
   );
 };

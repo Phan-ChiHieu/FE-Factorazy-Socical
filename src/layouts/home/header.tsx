@@ -13,19 +13,33 @@ import { HEADER, TITLE_HEADER } from './_mock';
 import Link from 'next/link';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
-import CustomPopover, { usePopover } from '@/components/custom-popover';
+import CustomPopover, { MenuPopoverArrowValue, usePopover } from '@/components/custom-popover';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import ButtonBase from '@mui/material/ButtonBase';
+import Iconify from '@/components/iconify';
+import { fontWeight } from '@mui/system';
+
+
+
+
+const series = [
+  {
+    type: 'EN',
+  },
+  {
+    type: 'VI',
+  },
+  {
+    type: 'FN',
+  },
+];
+
 
 export default function Header() {
-
-  const [age, setAge] = React.useState('Ten');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
   const popover = usePopover();
 
-  const [seriesData, setSeriesData] = useState('Year');
+  const [seriesData, setSeriesData] = useState('EN');
 
   const handleChangeSeries = useCallback(
     (newValue: string) => {
@@ -68,9 +82,31 @@ export default function Header() {
             >
               {TITLE_HEADER.manufacturing.value}
             </Typography>
+
             <Stack direction="row" gap="14px">
-              <CustomPopover open={popover.open} onClose={popover.onClose} sx={{ width: 140 }}>
-                {/* {series.map((option) => (
+              <ButtonBase
+                onClick={popover.onOpen}
+                sx={{
+                  pl: 1,
+                  py: 0.5,
+                  pr: 0.5,
+                  borderRadius: 1,
+                  typography: 'subtitle1',
+                  // bgcolor: 'background.neutral',
+                  color: '#fff',
+                  fontWeight: 600
+                }}
+              >
+                {seriesData}
+                <Iconify
+                  width={16}
+                  icon={popover.open ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
+                  sx={{ ml: 0.5 }}
+                />
+              </ButtonBase>
+
+              <CustomPopover open={popover.open} onClose={popover.onClose} sx={{ width: 70 }}>
+                {series.map((option) => (
                   <MenuItem
                     key={option.type}
                     selected={option.type === seriesData}
@@ -78,8 +114,7 @@ export default function Header() {
                   >
                     {option.type}
                   </MenuItem>
-                ))} */}
-                hieu
+                ))}
               </CustomPopover>
 
               <Typography
@@ -89,9 +124,10 @@ export default function Header() {
                 color="#fff"
                 position="relative"
                 sx={{
-                  padding: '10px 16px',
+                  padding: '10px 0px',
                   borderRadius: '8px',
                   fontWeight: 600,
+                  whiteSpace: 'nowrap',
                   '&:hover': {
                     color: '#5DFBDD',
                   }
@@ -111,6 +147,7 @@ export default function Header() {
                   border: '1px solid #D0D5DD',
                   borderRadius: '8px',
                   fontWeight: 600,
+                  whiteSpace: 'nowrap',
                   boxShadow: '0px 1px 2px 0px rgba(16, 24, 40, 0.05)',
                   transition: 'all 0.2s ease',
                   '&:hover': {
