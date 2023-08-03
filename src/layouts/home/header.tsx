@@ -1,4 +1,3 @@
-
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,8 +7,6 @@ import Typography from '@mui/material/Typography';
 import { HEADER, TITLE_HEADER } from './_mock';
 import Link from 'next/link';
 import PopoverNav from './popover-nav';
-
-
 
 export default function Header() {
   return (

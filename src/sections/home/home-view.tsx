@@ -1,5 +1,6 @@
+
 import Stack from '@mui/material/Stack';
-import Box, { positions } from '@mui/system/Box';
+import Box from '@mui/system/Box';
 import React from 'react';
 import Image from 'next/image';
 import { bgGradient } from '@/theme/css';
@@ -12,12 +13,13 @@ import SearchView from './components/search-view';
 
 
 const HomeView = () => {
+
   return (
     <Stack
       sx={{
         color: '#fff',
         height: '100%',
-        backgroundColor: '#FFFCF6'
+        backgroundColor: '#FFFCF6',
       }}
     >
       <Box
@@ -63,33 +65,26 @@ const HomeView = () => {
             sx={{
               position: 'absolute',
               bottom: 0,
-              left: "50%",
-              transform: "translateX(-50%)",
-              zIndex: 20
+              left: '50%',
+              transform: 'translateX(-50%)',
+              zIndex: 20,
             }}
           >
-            <Stack
-              direction='row'
-              alignItems='flex-end'
-              gap={3}
-            >
-              <div className='icon-factorazy'>
+            <Stack direction="row" alignItems="flex-end" gap={3}>
+              <div className="icon-factorazy">
                 <LogoIcon />
               </div>
-              <Box position='relative'>
-                <Image
-                  alt="factorazy-log-500"
-                  src="/assets/images/home/logo-500.svg"
-                  width={94}
-                  height={53}
-                  quality={100}
-                  priority
-                />
+              <Box position="relative">
+                <Image alt="factorazy-log-500" src="/assets/images/home/logo-500.svg" width={94} height={53} quality={100} priority />
               </Box>
             </Stack>
-            <Stack direction='row' alignItems='center' pt='18px'>
-              <Typography textTransform='uppercase' color="#2DC0AC" fontWeight={400} pr='6px' whiteSpace='nowrap'>Green-light</Typography>
-              <Typography textTransform='uppercase' fontWeight={400} whiteSpace='nowrap'>your journey to better products!</Typography>
+            <Stack direction="row" alignItems="center" pt="18px">
+              <Typography textTransform="uppercase" color="#2DC0AC" fontWeight={400} pr="6px" whiteSpace="nowrap">
+                Green-light
+              </Typography>
+              <Typography textTransform="uppercase" fontWeight={400} whiteSpace="nowrap">
+                your journey to better products!
+              </Typography>
             </Stack>
             <SearchView />
           </Box>
@@ -102,7 +97,7 @@ const HomeView = () => {
           color: '#000',
         }}
       />
-    </Stack >
+    </Stack>
   );
 };
 
