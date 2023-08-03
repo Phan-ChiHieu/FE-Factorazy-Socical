@@ -6,48 +6,35 @@ import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/system/Box';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
-import { endpoints, fetcherHidden } from '@/utils/axios';
-import useSWR from 'swr';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
 
 export default function SearchView() {
+  const { suggest, suggestLoading } = useGetSuggest();
   // check de hien thi diu lieu uu tien khi lan dau click vao input
   const [checkSuggest, setCheckSuggest] = useState(true);
-  // lay du lieu tu api get-suggest
-  // const [dataSuggest, setDataSuggest] = useState([]);
-  // const [loading, setLoading] = useState(false);
 
-  const { data: dataListSuggest, isLoading: isLoadingListSuggest } = useSWR(endpoints.landingSearch.getSuggest, fetcherHidden);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // api all list get-suggest
-  // const listSuggest = async () => {
-  //   setLoading(true);
-  //   const response = await fetch(endpoints.landingSearch.getSuggest);
-  //   try {
-  //     const data = await response.json();
-  //     const result = data.data.data.enterprises;
-  //     const check = data.data.resultCode;
+  const debouncedQuery = useDebounce(searchQuery);
+  const { autoComplete, autoCompleteLoading } = useGetAutoComplete(debouncedQuery);
 
-  //     if (check === 200) {
-  //       setDataSuggest(result);
-  //       setLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('>>> Error: ' + error);
-  //   }
-  // };
+  console.log('autoComplete', autoComplete.data);
 
-  const options = dataListSuggest?.data?.data?.enterprises.map((option: any) => {
+  const options = suggest?.data?.enterprises.map((option: any) => {
     return {
       firstLetter: option.type === 'company' ? 'Company' : 'Supplier',
       ...option,
     };
   });
 
-  console.log('dataListSuggest', dataListSuggest?.data?.data?.enterprises);
+  const handleSearch = useCallback((inputValue: string) => {
+    setSearchQuery(inputValue);
+  }, []);
 
   return (
     <>
@@ -71,8 +58,9 @@ export default function SearchView() {
           freeSolo
           // Khi click vao input moi call api
           // onOpen={() => listSuggest()}
-          disabled={isLoadingListSuggest}
-          loading={isLoadingListSuggest}
+          onInputChange={(event, newValue) => handleSearch(newValue)}
+          disabled={suggestLoading}
+          loading={suggestLoading}
           options={options}
           groupBy={(option: any) => option.firstLetter}
           getOptionLabel={(option) => {
@@ -95,7 +83,7 @@ export default function SearchView() {
                 ),
                 endAdornment: (
                   <InputAdornment position="end">
-                    {isLoadingListSuggest ? <CircularProgress color="inherit" size={20} /> : null}
+                    {suggestLoading ? <CircularProgress color="inherit" size={20} /> : null}
                     <CameraIcon />
                     {params.InputProps.endAdornment}
                   </InputAdornment>
