@@ -4,7 +4,7 @@ import match from 'autosuggest-highlight/match';
 
 import CameraIcon from '@/assets/icons/camera-icon';
 import SearchIcon from '@/assets/icons/search-icon';
-import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/system/Box';
@@ -13,13 +13,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
 import { useDebounce } from '@/hooks/use-debounce';
-import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
+import { useGetAutoComplete, useGetIp, useGetSuggest } from '@/apis/search-home';
 import Typography from '@mui/material/Typography';
+
 
 export default function SearchView() {
   const { suggest, suggestLoading } = useGetSuggest();
   const [searchQuery, setSearchQuery] = useState('');
-  const [value, setValue] = React.useState<string | null>();
   const debouncedQuery = useDebounce(searchQuery);
   // api khi search tu khoa tra ve array(6)
   const { autoComplete, autoCompleteLoading } = useGetAutoComplete(debouncedQuery);
@@ -34,8 +34,6 @@ export default function SearchView() {
   const handleSearch = useCallback((inputValue: string) => {
     setSearchQuery(inputValue);
   }, []);
-
-  console.log('autoComplete', autoComplete);
 
   return (
     <>

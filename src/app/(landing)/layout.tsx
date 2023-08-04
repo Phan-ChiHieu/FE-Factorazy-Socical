@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Web Frontend',
 };
 
-export default function HomeLayout({ children }: { children: React.ReactNode }) {
+export default function HomeLayout({ children, searchParams }: { children: React.ReactNode; searchParams: any }) {
+  const city = searchParams?.city;
+  console.log(city);
   return <HomeLayoutView>{children}</HomeLayoutView>;
 }

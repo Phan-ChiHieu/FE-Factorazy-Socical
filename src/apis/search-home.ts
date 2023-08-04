@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import { useMemo } from 'react';
 // utils
 import { fetcher, endpoints, fetcherHidden, fetcherServer } from 'src/utils/axios';
+import { HOST_TOKEN_LOCATI0N } from '@/config-global';
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +41,26 @@ export function useGetAutoComplete(content: string) {
       autoCompleteError: error,
       autoCompleteValidating: isValidating,
       //   suggestEmpty: !isLoading && !data?.posts.length,
+    }),
+    [data, error, isLoading, isValidating]
+  );
+
+  return memoizedValue;
+}
+
+// ----------------------------------------------------------------------
+
+export function useGetIp() {
+  const URL = `https://ipinfo.io/json?token=${HOST_TOKEN_LOCATI0N}`;
+
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcherHidden);
+
+  const memoizedValue = useMemo(
+    () => ({
+      ipToken: (data as any) || [],
+      ipTokenLoading: isLoading,
+      ipTokenError: error,
+      ipTokenValidating: isValidating,
     }),
     [data, error, isLoading, isValidating]
   );

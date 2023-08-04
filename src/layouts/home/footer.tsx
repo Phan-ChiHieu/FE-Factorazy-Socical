@@ -1,5 +1,6 @@
-'use client'
+'use client';
 
+import { useGetIp } from '@/apis/search-home';
 import LocationIcon from '@/assets/icons/location-icon';
 import { endpoints, fetcherHidden } from '@/utils/axios';
 import Box from '@mui/material/Box';
@@ -8,12 +9,10 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import React from 'react';
-import useSWR from 'swr';
 
 export default function Footer() {
-  const { data: dataLocation, isLoading: isLoadingListSuggest } = useSWR(endpoints.location, fetcherHidden);
+  const { ipToken, ipTokenLoading } = useGetIp();
 
-  console.log('>>>>', dataLocation);
   return (
     <Box
       component="footer"
@@ -29,7 +28,7 @@ export default function Footer() {
             <Stack alignItems="center" justifyContent="center">
               <LocationIcon />
             </Stack>
-            <div>VIETNAM</div>
+            <div>{ipToken.country}</div>
           </Stack>
           <Stack direction="row" alignItems="center" gap="18px">
             <Typography component={Link} href="/dashboard" variant="subtitle1">

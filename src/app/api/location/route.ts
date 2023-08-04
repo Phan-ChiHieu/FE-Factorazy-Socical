@@ -1,13 +1,18 @@
-import { HOST_API, HOST_API_LOCATI0N } from '@/config-global';
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export async function GET() {
-  const res = await fetch(HOST_API_LOCATI0N!, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await res.json();
+export const config = {
+  matcher: ['/'],
+};
 
-  return NextResponse.json({ data });
+export function middleware(request: NextRequest) {
+  const { nextUrl: url, geo } = request;
+
+  const city = geo?.city ?? '';
+  const country = geo?.country ?? '';
+
+  url.searchParams.set('city', city);
+  url.searchParams.set('country', country);
+
+  return NextResponse.rewrite(url);
 }
