@@ -1,53 +1,41 @@
 'use client';
+import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match';
 
 import CameraIcon from '@/assets/icons/camera-icon';
 import SearchIcon from '@/assets/icons/search-icon';
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/system/Box';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
-import { endpoints, fetcherHidden } from '@/utils/axios';
-import useSWR from 'swr';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
+import Typography from '@mui/material/Typography';
 
 export default function SearchView() {
-  // check de hien thi diu lieu uu tien khi lan dau click vao input
-  const [checkSuggest, setCheckSuggest] = useState(true);
-  // lay du lieu tu api get-suggest
-  // const [dataSuggest, setDataSuggest] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const { suggest, suggestLoading } = useGetSuggest();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [value, setValue] = React.useState<string | null>();
+  const debouncedQuery = useDebounce(searchQuery);
+  // api khi search tu khoa tra ve array(6)
+  const { autoComplete, autoCompleteLoading } = useGetAutoComplete(debouncedQuery);
 
-  const { data: dataListSuggest, isLoading: isLoadingListSuggest } = useSWR(endpoints.landingSearch.getSuggest, fetcherHidden);
-
-  // api all list get-suggest
-  // const listSuggest = async () => {
-  //   setLoading(true);
-  //   const response = await fetch(endpoints.landingSearch.getSuggest);
-  //   try {
-  //     const data = await response.json();
-  //     const result = data.data.data.enterprises;
-  //     const check = data.data.resultCode;
-
-  //     if (check === 200) {
-  //       setDataSuggest(result);
-  //       setLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('>>> Error: ' + error);
-  //   }
-  // };
-
-  const options = dataListSuggest?.data?.data?.enterprises.map((option: any) => {
+  const options = suggest?.data?.enterprises.map((option: any) => {
     return {
       firstLetter: option.type === 'company' ? 'Company' : 'Supplier',
       ...option,
     };
   });
 
-  console.log('dataListSuggest', dataListSuggest?.data?.data?.enterprises);
+  const handleSearch = useCallback((inputValue: string) => {
+    setSearchQuery(inputValue);
+  }, []);
+
+  console.log('autoComplete', autoComplete);
 
   return (
     <>
@@ -64,46 +52,104 @@ export default function SearchView() {
           cursor: 'pointer',
         }}
       >
-        <Autocomplete
-          id="grouped-suggest"
-          size="small"
-          fullWidth
-          freeSolo
-          // Khi click vao input moi call api
-          // onOpen={() => listSuggest()}
-          disabled={isLoadingListSuggest}
-          loading={isLoadingListSuggest}
-          options={options}
-          groupBy={(option: any) => option.firstLetter}
-          getOptionLabel={(option) => {
-            // Value selected with enter, right from the input
-            if (typeof option === 'string') {
-              return option;
-            }
-            return option.title;
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Find Any Company’s Suppliers"
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    {isLoadingListSuggest ? <CircularProgress color="inherit" size={20} /> : null}
-                    <CameraIcon />
-                    {params.InputProps.endAdornment}
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-        />
+        {autoComplete.length === 0 ? (
+          <Autocomplete
+            id="grouped-suggest"
+            size="small"
+            fullWidth
+            // Khi click vao input moi call api
+            // onOpen={() => listSuggest()}
+            onInputChange={(event, newValue) => handleSearch(newValue)}
+            disabled={suggestLoading}
+            loading={suggestLoading}
+            options={options}
+            groupBy={(option: any) => option.firstLetter}
+            getOptionLabel={(option) => {
+              // Value selected with enter, right from the input
+              if (typeof option === 'string') {
+                return option;
+              }
+              return option.title;
+            }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                placeholder="Find Any Company’s Suppliers"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {suggestLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                      <CameraIcon />
+                      {params.InputProps.endAdornment}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+          />
+        ) : (
+          <Autocomplete
+            id="auto-complete"
+            size="small"
+            fullWidth
+            options={autoComplete.data}
+            loading={autoCompleteLoading}
+            onInputChange={(event, newValue) => handleSearch(newValue)}
+            getOptionLabel={(option: any) => option}
+            isOptionEqualToValue={(option, value) => option === value}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                placeholder="Find Any Company’s Suppliers"
+                InputProps={{
+                  ...params.InputProps,
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {autoCompleteLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                      <CameraIcon />
+                      {params.InputProps.endAdornment}
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            )}
+            renderOption={(props, option, { inputValue }) => {
+              const matches = match(option, inputValue);
+              const parts = parse(option, matches);
+
+              console.log('>>>>>>', parts);
+
+              return (
+                <li {...props} key={option}>
+                  {parts.map((part, index) => (
+                    <Typography
+                      key={index}
+                      component="span"
+                      color={part.highlight ? 'primary' : 'textPrimary'}
+                      sx={{
+                        typography: 'body2',
+                        fontWeight: part.highlight ? 'fontWeightSemiBold' : 'fontWeightMedium',
+                      }}
+                    >
+                      {part.text}
+                    </Typography>
+                  ))}
+                </li>
+              );
+            }}
+          />
+        )}
 
         <Stack mt="24px" direction="row" justifyContent="center" alignItems="center">
           <ButtonBase
@@ -230,54 +276,3 @@ const top100Films = [
   { title: '3 Idiots', year: 2009 },
   { title: 'Monty Python and the Holy Grail', year: 1975 },
 ];
-
-/*
- <Autocomplete
-          size="small"
-          fullWidth
-          freeSolo
-          open={open}
-          onOpen={() => {
-            setOpen(true);
-          }}
-          onClose={() => {
-            setOpen(false);
-          }}
-          // isOptionEqualToValue={(option, value) => option.title === value.title}
-          getOptionLabel={(option: any) => option.title}
-          options={options}
-          loading={loading}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              placeholder="Find Any Company’s Suppliers"
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    <CameraIcon />
-                    {params.InputProps.endAdornment}
-                  </InputAdornment>
-                ),
-              }}
-            />
-          )}
-          renderOption={(props, option) => (
-            <Box
-              sx={{
-                padding: '8px',
-              }}
-            >
-              <Box component="li" px="10px" {...props} key={option.title}>
-                {option.title}
-              </Box>
-            </Box>
-          )}
-        />
-*/

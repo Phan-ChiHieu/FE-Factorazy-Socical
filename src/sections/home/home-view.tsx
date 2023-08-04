@@ -58,6 +58,21 @@ const HomeView = () => {
             }}
             priority
           />
+
+          {/* <Box
+            component="img"
+            alt="auth"
+            src={'/assets/images/home/banner_main.jpg'}
+            sx={{
+              objectFit: 'cover',
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              width: '100%',
+              height: '100%',
+            }}
+          /> */}
+
           <Box
             sx={{
               position: 'absolute',
