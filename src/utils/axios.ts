@@ -42,8 +42,8 @@ export const fetcherServer = async (args: string | [string, AxiosRequestConfig])
 // ----------------------------------------------------------------------
 
 export const endpoints = {
-  enterprise: {
-    suggest: '/api/enterprise/get-suggest',
-    autoComplete: '/api/enterprise/get-auto-complete',
+  location: 'https://ipinfo.io/json',
+  landingSearch: {
+    getSuggest: '/api/enterprise/get-suggest',
   },
 };
