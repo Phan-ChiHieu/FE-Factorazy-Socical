@@ -25,6 +25,10 @@ export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
 
 // ----------------------------------------------------------------------
 
+export const fetcherHidden = (url: string) => fetch(url).then((r) => r.json());
+
+// ----------------------------------------------------------------------
+
 export const endpoints = {
   landingSearch: {
     getSuggest: '/api/enterprise/get-suggest',

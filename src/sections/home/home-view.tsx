@@ -1,4 +1,3 @@
-
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
 import React from 'react';
@@ -7,19 +6,17 @@ import { bgGradient } from '@/theme/css';
 import LogoIcon from '@/assets/icons/logo-icon';
 
 // iamges
-import BannerMain from '/public/assets/images/home/banner-main.jpg';
+import BannerMain from '@/assets/images/home/banner_main.jpg';
 import Typography from '@mui/material/Typography';
 import SearchView from './components/search-view';
 
-
 const HomeView = () => {
-
   return (
     <Stack
       sx={{
         color: '#fff',
         height: '100%',
-        backgroundColor: '#FFFCF6',
+        backgroundColor: '#FFF',
       }}
     >
       <Box
@@ -50,7 +47,7 @@ const HomeView = () => {
             },
           }}
         >
-          <Image
+          {/* <Image
             alt="factorazy-banner"
             src={BannerMain}
             placeholder="blur"
@@ -60,6 +57,19 @@ const HomeView = () => {
               objectFit: 'cover',
             }}
             priority
+          /> */}
+          <Box
+            component="img"
+            alt="auth"
+            src={'/assets/images/home/banner_main.jpg'}
+            sx={{
+              objectFit: 'cover',
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              width: '100%',
+              height: '100%',
+            }}
           />
           <Box
             sx={{

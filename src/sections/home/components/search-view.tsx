@@ -10,39 +10,44 @@ import React, { useEffect, useState } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
-import { endpoints } from '@/utils/axios';
+import { endpoints, fetcherHidden } from '@/utils/axios';
+import useSWR from 'swr';
 
 export default function SearchView() {
-  const [dataSuggest, setDataSuggest] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // check de hien thi diu lieu uu tien khi lan dau click vao input
+  const [checkSuggest, setCheckSuggest] = useState(true);
+  // lay du lieu tu api get-suggest
+  // const [dataSuggest, setDataSuggest] = useState([]);
+  // const [loading, setLoading] = useState(false);
+
+  const { data: dataListSuggest, isLoading: isLoadingListSuggest } = useSWR(endpoints.landingSearch.getSuggest, fetcherHidden);
 
   // api all list get-suggest
-  const listSuggest = async () => {
-    const response = await fetch(endpoints.landingSearch.getSuggest);
-    try {
-      const data = await response.json();
-      const result = data.data.data.enterprises;
-      const check = data.data.resultCode;
+  // const listSuggest = async () => {
+  //   setLoading(true);
+  //   const response = await fetch(endpoints.landingSearch.getSuggest);
+  //   try {
+  //     const data = await response.json();
+  //     const result = data.data.data.enterprises;
+  //     const check = data.data.resultCode;
 
-      if (check === 200) {
-        setDataSuggest(result);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log('>>> Error: ' + error);
-    }
-  };
+  //     if (check === 200) {
+  //       setDataSuggest(result);
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log('>>> Error: ' + error);
+  //   }
+  // };
 
-  useEffect(() => {
-    listSuggest();
-  }, []);
-
-  const options = dataSuggest.map((option: any) => {
+  const options = dataListSuggest?.data?.data?.enterprises.map((option: any) => {
     return {
       firstLetter: option.type === 'company' ? 'Company' : 'Supplier',
       ...option,
     };
   });
+
+  console.log('dataListSuggest', dataListSuggest?.data?.data?.enterprises);
 
   return (
     <>
@@ -64,8 +69,12 @@ export default function SearchView() {
           size="small"
           fullWidth
           freeSolo
-          options={options.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-          groupBy={(option) => option.firstLetter}
+          // Khi click vao input moi call api
+          // onOpen={() => listSuggest()}
+          disabled={isLoadingListSuggest}
+          loading={isLoadingListSuggest}
+          options={options}
+          groupBy={(option: any) => option.firstLetter}
           getOptionLabel={(option) => {
             // Value selected with enter, right from the input
             if (typeof option === 'string') {
@@ -86,7 +95,7 @@ export default function SearchView() {
                 ),
                 endAdornment: (
                   <InputAdornment position="end">
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {isLoadingListSuggest ? <CircularProgress color="inherit" size={20} /> : null}
                     <CameraIcon />
                     {params.InputProps.endAdornment}
                   </InputAdornment>
@@ -95,6 +104,7 @@ export default function SearchView() {
             />
           )}
         />
+
         <Stack mt="24px" direction="row" justifyContent="center" alignItems="center">
           <ButtonBase
             sx={{
@@ -110,139 +120,10 @@ export default function SearchView() {
             Search
           </ButtonBase>
         </Stack>
-        {/* <button onClick={() => handleCheckValue()}>Click</button> */}
       </Box>
     </>
   );
 }
-
-const demoApi = [
-  {
-    success: true,
-    data: {
-      companies: [
-        {
-          title: 'To Order Of M & T Bank',
-          countryCode: 'US',
-          type: 'company',
-          address: '1800 Washington Blvd, Fl 8, Baltimore, Md 21230, Us',
-          totalShipments: 6,
-          mostRecentShipment: '18/05/2019',
-          topSuppliers_string: '["Dk Commodity","Foods And Inns","Max Grand","Henan Xindatong Aluminum Industrial"]',
-          topSuppliers: null,
-          url: 'company/to-order-of-m-t-bank',
-          totalItem: 0,
-          id: '72b5f923-d65d-4691-bd22-0000ab1f9990',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-        {
-          title: 'Victoria C',
-          countryCode: 'US',
-          type: 'company',
-          address: '5 Mountain Ash, Irvine, Ca 92604, Us',
-          totalShipments: 1,
-          mostRecentShipment: '14/08/2020',
-          topSuppliers_string: '["Piaoyang Li"]',
-          topSuppliers: null,
-          url: 'company/victoria-c',
-          totalItem: 0,
-          id: 'f2cedb43-e168-4890-b70c-000087a1802c',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-        {
-          title: 'Willie Clark E',
-          countryCode: 'US',
-          type: 'company',
-          address: '4714 Parsons Blvd',
-          totalShipments: 1,
-          mostRecentShipment: '31/08/2022',
-          topSuppliers_string: '["Shenzhen Zeshun Logistics"]',
-          topSuppliers: null,
-          url: 'company/willie-clark-e',
-          totalItem: 0,
-          id: 'c6dafe79-5663-4370-b567-00015b2dc633',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-      ],
-      suppliers: [
-        {
-          title: 'Shanghai M E Fashion',
-          countryCode: 'CN',
-          type: 'supplier',
-          address: '172 Hami Road 200001 Shanghai',
-          totalShipments: 48,
-          mostRecentShipment: '20/05/2023',
-          topSuppliers_string: '["Aquarius","Cat5 Commerce","Tri Coastal Design Group","The Boeing Store","Cat5 Commmerce"]',
-          topSuppliers: null,
-          url: 'supplier/shanghai-m-e-fashion',
-          totalItem: 0,
-          id: '6d7c4258-4200-4b3a-9b91-00004903da2e',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-        {
-          title: 'Anghinetti & Camptel S R L',
-          countryCode: 'IT',
-          type: 'supplier',
-          address: 'Via Xx Settembre 95 Gussola 26040 It',
-          totalShipments: 25,
-          mostRecentShipment: '22/03/2021',
-          topSuppliers_string: '["Albatross Usa","Albatros Usa","European Finishing Equipment","Tecnologia En Costura De"]',
-          topSuppliers: null,
-          url: 'supplier/anghinetti-camptel-s-r-l',
-          totalItem: 0,
-          id: '1a869bbb-beba-4133-a3cf-0000aec30f21',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-        {
-          title: 'Suttons Internation N A 485C Route',
-          countryCode: 'US',
-          type: 'supplier',
-          address: '1 South - Suite 240 Iselin Nj 08830 Tel XXX-XXX-XXXX Fax XXX-XXX-XXXX',
-          totalShipments: 1,
-          mostRecentShipment: '23/06/2016',
-          topSuppliers_string: '["Suttons International Japan K K"]',
-          topSuppliers: null,
-          url: 'supplier/suttons-internation-n-a-485c-route',
-          totalItem: 0,
-          id: '4fc5cbc4-f3c6-41ac-804c-0000e9293092',
-          created: 0.0,
-          createdBy: null,
-          updated: null,
-          updatedBy: null,
-          deleted: false,
-          active: true,
-        },
-      ],
-    },
-    resultCode: 200,
-    resultMessage: null,
-  },
-];
 
 const top100Films = [
   { title: 'The Shawshank Redemption', year: 1994 },
