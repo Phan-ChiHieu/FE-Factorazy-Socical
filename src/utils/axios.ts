@@ -30,9 +30,8 @@ export const fetcherHidden = (url: string) => fetch(url).then((r) => r.json());
 // ----------------------------------------------------------------------
 
 export const endpoints = {
+  location: 'https://ipinfo.io/json',
   landingSearch: {
     getSuggest: '/api/enterprise/get-suggest',
-    // login: '/api/auth/login',
-    // register: '/api/auth/register',
   },
 };

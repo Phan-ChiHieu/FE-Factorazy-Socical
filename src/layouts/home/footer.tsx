@@ -1,12 +1,19 @@
+'use client'
+
 import LocationIcon from '@/assets/icons/location-icon';
+import { endpoints, fetcherHidden } from '@/utils/axios';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import React from 'react';
+import useSWR from 'swr';
 
 export default function Footer() {
+  const { data: dataLocation, isLoading: isLoadingListSuggest } = useSWR(endpoints.location, fetcherHidden);
+
+  console.log('>>>>', dataLocation);
   return (
     <Box
       component="footer"

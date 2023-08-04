@@ -47,7 +47,7 @@ const HomeView = () => {
             },
           }}
         >
-          {/* <Image
+          <Image
             alt="factorazy-banner"
             src={BannerMain}
             placeholder="blur"
@@ -57,19 +57,6 @@ const HomeView = () => {
               objectFit: 'cover',
             }}
             priority
-          /> */}
-          <Box
-            component="img"
-            alt="auth"
-            src={'/assets/images/home/banner_main.jpg'}
-            sx={{
-              objectFit: 'cover',
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '100%',
-              height: '100%',
-            }}
           />
           <Box
             sx={{
@@ -84,7 +71,7 @@ const HomeView = () => {
               <div className="icon-factorazy">
                 <LogoIcon />
               </div>
-              <Box position="relative">
+              <Box position="relative" pb='16px'>
                 <Image alt="factorazy-log-500" src="/assets/images/home/logo-500.svg" width={94} height={53} quality={100} priority />
               </Box>
             </Stack>
@@ -112,3 +99,19 @@ const HomeView = () => {
 };
 
 export default HomeView;
+
+{
+  /* <Box
+            component="img"
+            alt="auth"
+            src={'/assets/images/home/banner_main.jpg'}
+            sx={{
+              objectFit: 'cover',
+              position: 'absolute',
+              top: '0',
+              left: '0',
+              width: '100%',
+              height: '100%',
+            }}
+          /> */
+}
