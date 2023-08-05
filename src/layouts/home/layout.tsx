@@ -1,7 +1,9 @@
 import Box from '@mui/system/Box';
 import React from 'react';
-import Header from './header';
 import Footer from './footer';
+import dynamic from 'next/dynamic';
+
+const HeaderNoSSR = dynamic(() => import('./header'), { ssr: false });
 
 type HomeLayoutT = {
   children: React.ReactNode;
@@ -10,7 +12,7 @@ type HomeLayoutT = {
 export default function HomeLayoutView({ children }: HomeLayoutT) {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
-      <Header />
+      <HeaderNoSSR />
       <Box
         component="main"
         sx={{

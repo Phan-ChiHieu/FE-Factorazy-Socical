@@ -2,7 +2,6 @@
 
 import { useGetIp } from '@/apis/search-home';
 import LocationIcon from '@/assets/icons/location-icon';
-import { endpoints, fetcherHidden } from '@/utils/axios';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -11,7 +10,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function Footer() {
-  const { ipToken, ipTokenLoading } = useGetIp();
+  const { ipToken } = useGetIp();
 
   return (
     <Box

@@ -9,6 +9,7 @@ import { useLocales } from '@/locales';
 
 export default function PopoverNav() {
   const locales = useLocales();
+  const { t } = useLocales();
 
   console.log(locales);
 
@@ -35,6 +36,7 @@ export default function PopoverNav() {
           // bgcolor: 'background.neutral',
           color: '#fff',
           fontWeight: 600,
+          textTransform: 'uppercase',
         }}
       >
         {locales.currentLang.value}

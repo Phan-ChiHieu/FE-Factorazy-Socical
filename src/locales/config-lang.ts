@@ -7,27 +7,27 @@ import { enUS, frFR, zhCN, viVN, arSA } from '@mui/material/locale';
 export const allLangs = [
   {
     label: 'English',
-    value: 'EN',
+    value: 'en',
     systemValue: enUS,
     icon: 'flagpack:gb-nir',
   },
   {
     label: 'Vietnamese',
-    value: 'Vi',
+    value: 'vi',
     systemValue: viVN,
     icon: 'flagpack:vn',
+  },
+  {
+    label: 'Chinese',
+    value: 'cn',
+    systemValue: zhCN,
+    icon: 'flagpack:cn',
   },
   // {
   //   label: 'French',
   //   value: 'fr',
   //   systemValue: frFR,
   //   icon: 'flagpack:fr',
-  // },
-  // {
-  //   label: 'Chinese',
-  //   value: 'cn',
-  //   systemValue: zhCN,
-  //   icon: 'flagpack:cn',
   // },
   // {
   //   label: 'Arabic',

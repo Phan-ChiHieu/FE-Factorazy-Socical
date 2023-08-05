@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
@@ -13,7 +13,6 @@ import { useLocales } from '@/locales';
 
 export default function Header() {
   const { t } = useLocales();
-
 
   return (
     <AppBar>
@@ -46,8 +45,7 @@ export default function Header() {
               pr="18px"
               textTransform="uppercase"
             >
-              {/* {TITLE_HEADER.manufacturing.value} */}
-              {t('app')}
+              {t('manufacturing_channel')}
             </Typography>
 
             <Stack direction="row" gap="14px">

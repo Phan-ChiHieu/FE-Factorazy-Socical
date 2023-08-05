@@ -10,9 +10,9 @@ import { defaultLang } from './config-lang';
 //
 import translationEn from './langs/en.json';
 import translationVi from './langs/vi.json';
-// import translationFr from './langs/fr.json';
-// import translationCn from './langs/cn.json';
-// import translationAr from './langs/ar.json';
+import translationFr from './langs/fr.json';
+import translationCn from './langs/cn.json';
+import translationAr from './langs/ar.json';
 
 // ----------------------------------------------------------------------
 
@@ -25,9 +25,9 @@ i18n
     resources: {
       en: { translations: translationEn },
       vi: { translations: translationVi },
-      // fr: { translations: translationFr },
-      // cn: { translations: translationCn },
-      // ar: { translations: translationAr },
+      fr: { translations: translationFr },
+      cn: { translations: translationCn },
+      ar: { translations: translationAr },
     },
     lng,
     fallbackLng: lng,
