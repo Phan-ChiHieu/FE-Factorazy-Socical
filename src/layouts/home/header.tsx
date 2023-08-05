@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,9 +8,11 @@ import { HEADER, TITLE_HEADER } from './_mock';
 import Link from 'next/link';
 import PopoverNav from './popover-nav';
 import { useLocales } from '@/locales';
+import { useTheme } from '@mui/material/styles';
 
 export default function Header() {
   const { t } = useLocales();
+  const theme = useTheme();
 
   return (
     <AppBar>
@@ -31,7 +31,7 @@ export default function Header() {
             justifyContent="space-between"
             alignItems="center"
             sx={{
-              color: '#000',
+              color: theme.palette.factorazy.text.paper,
               width: 1,
               paddingTop: '16px',
             }}
@@ -54,7 +54,7 @@ export default function Header() {
                 variant="subtitle1"
                 component={Link}
                 href={TITLE_HEADER.signIn.href}
-                color="#fff"
+                color={theme.palette.factorazy.text.paper}
                 position="relative"
                 sx={{
                   padding: '10px 0px',

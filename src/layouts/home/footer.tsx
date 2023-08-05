@@ -1,4 +1,3 @@
-'use client';
 
 import { useGetIp } from '@/apis/search-home';
 import LocationIcon from '@/assets/icons/location-icon';
