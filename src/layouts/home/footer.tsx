@@ -1,15 +1,13 @@
 
-import { useGetIp } from '@/apis/search-home';
-import LocationIcon from '@/assets/icons/location-icon';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Link from 'next/link';
 import React from 'react';
+import LoacationView from './location-view';
 
 export default function Footer() {
-  const { ipToken } = useGetIp();
 
   return (
     <Box
@@ -23,12 +21,7 @@ export default function Footer() {
     >
       <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
         <Stack direction="row" alignItems="center" justifyContent="space-between" width={1}>
-          <Stack direction="row" alignItems="center" justifyContent="center" gap="6px">
-            <Stack alignItems="center" justifyContent="center">
-              <LocationIcon />
-            </Stack>
-            <div>{ipToken.country}</div>
-          </Stack>
+          <LoacationView />
           <Stack direction="row" alignItems="center" gap="18px">
             <Typography component={Link} href="/dashboard" variant="subtitle1">
               Terms and Conditions

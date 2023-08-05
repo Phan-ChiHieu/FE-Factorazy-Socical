@@ -3,7 +3,7 @@ import Box from '@mui/system/Box';
 import React from 'react';
 import Image from 'next/image';
 import { bgGradient } from '@/theme/css';
-import LogoIcon from '@/assets/icons/logo-icon';
+import LogoIcon from '@/assets/icons/logo-home-icon';
 
 // iamges
 import BannerMain from '@/assets/images/home/banner_main.jpg';
@@ -55,7 +55,7 @@ const HomeView = () => {
             fill
             style={{
               objectFit: 'cover',
-              objectPosition: 'top'
+              objectPosition: 'top',
             }}
             priority
           />
@@ -83,12 +83,34 @@ const HomeView = () => {
               zIndex: 20,
             }}
           >
-            <Stack direction="row" alignItems="flex-end" gap={3}>
+            <Stack
+              sx={{
+                alignItems: { xs: 'center', sm: 'flex-end' },
+                flexDirection: 'row',
+                justifyContent: 'center',
+                gap: '24px'
+              }}
+            >
               <div className="icon-factorazy">
                 <LogoIcon />
               </div>
-              <Box position="relative" pb='16px'>
-                <Image alt="factorazy-log-500" src="/assets/images/home/logo-500.svg" width={94} height={53} quality={100} priority />
+              <Box
+                position="relative"
+                pb="16px"
+                sx={{
+                  width: { xs: '78px', sm: '94px' },
+                  height: { xs: '48px', sm: '54px' },
+                }}
+              >
+                <Image
+                  alt="factorazy-log-500"
+                  src="/assets/images/home/logo-500.svg"
+                  fill
+                  // width={94}
+                  // height={53}
+                  quality={100}
+                  priority
+                />
               </Box>
             </Stack>
             <Stack direction="row" alignItems="center" pt="18px">

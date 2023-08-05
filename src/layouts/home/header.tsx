@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles';
 import { useResponsive } from '@/hooks/use-responsive';
 import { useGetIp } from '@/apis/search-home';
 import LocationIcon from '@/assets/icons/location-icon';
+import LoacationView from './location-view';
 
 export default function Header() {
   const { t } = useLocales();
@@ -57,10 +58,7 @@ export default function Header() {
 
             {!smUp && (
               <Stack direction="row" alignItems="center" justifyContent="center" gap="6px">
-                <Stack alignItems="center" justifyContent="center">
-                  <LocationIcon />
-                </Stack>
-                <div>{ipToken.country}</div>
+                <LoacationView isColor />
               </Stack>
             )}
 
