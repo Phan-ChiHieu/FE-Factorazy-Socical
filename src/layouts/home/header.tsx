@@ -9,10 +9,15 @@ import Link from 'next/link';
 import PopoverNav from './popover-nav';
 import { useLocales } from '@/locales';
 import { useTheme } from '@mui/material/styles';
+import { useResponsive } from '@/hooks/use-responsive';
+import { useGetIp } from '@/apis/search-home';
+import LocationIcon from '@/assets/icons/location-icon';
 
 export default function Header() {
   const { t } = useLocales();
   const theme = useTheme();
+  const smUp = useResponsive('up', 'sm');
+  const { ipToken } = useGetIp();
 
   return (
     <AppBar>
@@ -36,17 +41,28 @@ export default function Header() {
               paddingTop: '16px',
             }}
           >
-            <Typography
-              variant="subtitle1"
-              component={Link}
-              href={TITLE_HEADER.manufacturing.href}
-              color="#fff"
-              position="relative"
-              pr="18px"
-              textTransform="uppercase"
-            >
-              {t('manufacturing_channel')}
-            </Typography>
+            {smUp && (
+              <Typography
+                variant="subtitle1"
+                component={Link}
+                href={TITLE_HEADER.manufacturing.href}
+                color="#fff"
+                position="relative"
+                pr="18px"
+                textTransform="uppercase"
+              >
+                {t('manufacturing_channel')}
+              </Typography>
+            )}
+
+            {!smUp && (
+              <Stack direction="row" alignItems="center" justifyContent="center" gap="6px">
+                <Stack alignItems="center" justifyContent="center">
+                  <LocationIcon />
+                </Stack>
+                <div>{ipToken.country}</div>
+              </Stack>
+            )}
 
             <Stack direction="row" gap="14px">
               <PopoverNav />

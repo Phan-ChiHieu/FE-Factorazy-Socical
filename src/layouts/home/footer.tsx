@@ -18,6 +18,7 @@ export default function Footer() {
         height: 45,
         display: 'flex',
         alignItems: 'center',
+        borderTop: '1px solid #BEC9C5'
       }}
     >
       <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>

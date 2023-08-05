@@ -55,6 +55,7 @@ const HomeView = () => {
             fill
             style={{
               objectFit: 'cover',
+              objectPosition: 'top'
             }}
             priority
           />
