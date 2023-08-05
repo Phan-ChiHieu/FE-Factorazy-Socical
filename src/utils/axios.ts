@@ -43,8 +43,8 @@ export const fetcherServer = async (args: string | [string, AxiosRequestConfig])
 
 export const endpoints = {
   enterprise: {
-    suggest: '/api/enterprise/get-suggest',
-    autoComplete: '/api/enterprise/get-auto-complete',
+    suggest: '/enterprise/get-suggest',
+    autoComplete: '/enterprise/get-auto-complete',
   },
   location: '/api/location',
 };

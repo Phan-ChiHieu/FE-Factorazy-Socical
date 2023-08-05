@@ -16,7 +16,6 @@ import { useDebounce } from '@/hooks/use-debounce';
 import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
 import Typography from '@mui/material/Typography';
 
-
 export default function SearchView() {
   const { suggest, suggestLoading } = useGetSuggest();
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +23,7 @@ export default function SearchView() {
   // api khi search tu khoa tra ve array(6)
   const { autoComplete, autoCompleteLoading } = useGetAutoComplete(debouncedQuery);
 
-  const options = suggest?.data?.enterprises.map((option: any) => {
+  const options = suggest?.enterprises?.map((option: any) => {
     return {
       firstLetter: option.type === 'company' ? 'Company' : 'Supplier',
       ...option,
@@ -96,7 +95,8 @@ export default function SearchView() {
             id="auto-complete"
             size="small"
             fullWidth
-            options={autoComplete.data}
+            options={autoComplete}
+            disabled={autoCompleteLoading}
             loading={autoCompleteLoading}
             onInputChange={(event, newValue) => handleSearch(newValue)}
             getOptionLabel={(option: any) => option}

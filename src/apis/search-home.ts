@@ -9,7 +9,7 @@ import { HOST_TOKEN_LOCATI0N } from '@/config-global';
 export function useGetSuggest() {
   const URL = endpoints.enterprise.suggest;
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcherHidden);
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
   const memoizedValue = useMemo(
     () => ({
@@ -30,7 +30,7 @@ export function useGetSuggest() {
 export function useGetAutoComplete(content: string) {
   const URL = content ? [endpoints.enterprise.autoComplete, { params: { content } }] : null;
 
-  const { data, isLoading, error, isValidating } = useSWR(URL, fetcherServer, {
+  const { data, isLoading, error, isValidating } = useSWR(URL, fetcher, {
     keepPreviousData: true,
   });
 
