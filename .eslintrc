@@ -10,9 +10,9 @@
     "prettier"
   ],
   "extends": [
-    // "airbnb",
-    // "airbnb-typescript",
-    // "airbnb/hooks",
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb/hooks",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",

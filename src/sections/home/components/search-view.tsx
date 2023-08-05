@@ -15,7 +15,6 @@ import Stack from '@mui/material/Stack';
 import { useDebounce } from '@/hooks/use-debounce';
 import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
 import Typography from '@mui/material/Typography';
-import SearchNotFound from '@/components/search-not-found';
 
 export default function SearchView() {
   const { suggest, suggestLoading } = useGetSuggest();
