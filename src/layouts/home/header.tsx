@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,8 +9,12 @@ import Typography from '@mui/material/Typography';
 import { HEADER, TITLE_HEADER } from './_mock';
 import Link from 'next/link';
 import PopoverNav from './popover-nav';
+import { useLocales } from '@/locales';
 
 export default function Header() {
+  const { t } = useLocales();
+
+
   return (
     <AppBar>
       <Toolbar
@@ -40,7 +46,8 @@ export default function Header() {
               pr="18px"
               textTransform="uppercase"
             >
-              {TITLE_HEADER.manufacturing.value}
+              {/* {TITLE_HEADER.manufacturing.value} */}
+              {t('app')}
             </Typography>
 
             <Stack direction="row" gap="14px">

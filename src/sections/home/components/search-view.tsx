@@ -13,7 +13,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import ButtonBase from '@mui/material/ButtonBase';
 import Stack from '@mui/material/Stack';
 import { useDebounce } from '@/hooks/use-debounce';
-import { useGetAutoComplete, useGetIp, useGetSuggest } from '@/apis/search-home';
+import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
 import Typography from '@mui/material/Typography';
 
 

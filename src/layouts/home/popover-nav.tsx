@@ -5,30 +5,21 @@ import MenuItem from '@mui/material/MenuItem';
 import CustomPopover, { usePopover } from '@/components/custom-popover';
 import ButtonBase from '@mui/material/ButtonBase';
 import Iconify from '@/components/iconify';
-
-const series = [
-  {
-    type: 'EN',
-  },
-  {
-    type: 'VI',
-  },
-  {
-    type: 'FN',
-  },
-];
+import { useLocales } from '@/locales';
 
 export default function PopoverNav() {
+  const locales = useLocales();
+
+  console.log(locales);
+
   const popover = usePopover();
 
-  const [seriesData, setSeriesData] = useState('EN');
-
-  const handleChangeSeries = useCallback(
-    (newValue: string) => {
+  const handleChangeLang = useCallback(
+    (newLang: string) => {
+      locales.onChangeLang(newLang);
       popover.onClose();
-      setSeriesData(newValue);
     },
-    [popover]
+    [locales, popover]
   );
 
   return (
@@ -46,14 +37,16 @@ export default function PopoverNav() {
           fontWeight: 600,
         }}
       >
-        {seriesData}
+        {locales.currentLang.value}
         <Iconify width={16} icon={popover.open ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'} sx={{ ml: 0.5 }} />
       </ButtonBase>
 
-      <CustomPopover open={popover.open} onClose={popover.onClose} sx={{ width: 70 }}>
-        {series.map((option) => (
-          <MenuItem key={option.type} selected={option.type === seriesData} onClick={() => handleChangeSeries(option.type)}>
-            {option.type}
+      <CustomPopover open={popover.open} onClose={popover.onClose} sx={{ width: 160 }}>
+        {locales.allLangs.map((option) => (
+          <MenuItem key={option.value} selected={option.value === locales.currentLang.value} onClick={() => handleChangeLang(option.value)}>
+            <Iconify icon={option.icon} sx={{ borderRadius: 0.65, width: 28 }} />
+
+            {option.label}
           </MenuItem>
         ))}
       </CustomPopover>

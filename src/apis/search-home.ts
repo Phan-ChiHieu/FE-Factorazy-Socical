@@ -67,3 +67,33 @@ export function useGetIp() {
 
   return memoizedValue;
 }
+
+/*
+city
+: 
+"Ho Chi Minh City"
+country
+: 
+"VN"
+hostname
+: 
+"static.vnpt.vn"
+ip
+: 
+"14.226.252.145"
+loc
+: 
+"10.8230,106.6296"
+org
+: 
+"AS45899 VNPT Corp"
+postal
+: 
+"71606"
+region
+: 
+"Ho Chi Minh"
+timezone
+: 
+"Asia/Ho_Chi_Minh"
+*/
