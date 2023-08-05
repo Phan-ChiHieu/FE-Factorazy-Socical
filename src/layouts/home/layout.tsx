@@ -1,12 +1,10 @@
-'use client'
+'use client';
 
 import Box from '@mui/system/Box';
 import React from 'react';
 import Footer from './footer';
-import dynamic from 'next/dynamic';
 import { useResponsive } from '@/hooks/use-responsive';
-
-const HeaderNoSSR = dynamic(() => import('./header'), { ssr: false });
+import Header from './header';
 
 type HomeLayoutT = {
   children: React.ReactNode;
@@ -16,7 +14,7 @@ export default function HomeLayoutView({ children }: HomeLayoutT) {
   const smUp = useResponsive('up', 'sm');
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
-      <HeaderNoSSR />
+      <Header />
       <Box
         component="main"
         sx={{

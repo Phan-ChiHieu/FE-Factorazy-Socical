@@ -1,3 +1,5 @@
+'use client';
+
 import Stack from '@mui/material/Stack';
 import Box from '@mui/system/Box';
 import React from 'react';
@@ -9,8 +11,11 @@ import LogoIcon from '@/assets/icons/logo-home-icon';
 import BannerMain from '@/assets/images/home/banner_main.jpg';
 import Typography from '@mui/material/Typography';
 import SearchView from './components/search-view';
+import { useResponsive } from '@/hooks/use-responsive';
 
 const HomeView = () => {
+  const smUp = useResponsive('up', 'sm');
+
   return (
     <Stack
       sx={{
@@ -60,20 +65,6 @@ const HomeView = () => {
             priority
           />
 
-          {/* <Box
-            component="img"
-            alt="auth"
-            src={'/assets/images/home/banner_main.jpg'}
-            sx={{
-              objectFit: 'cover',
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '100%',
-              height: '100%',
-            }}
-          /> */}
-
           <Box
             sx={{
               position: 'absolute',
@@ -81,6 +72,8 @@ const HomeView = () => {
               left: '50%',
               transform: 'translateX(-50%)',
               zIndex: 20,
+              width: { xs: '100%', sm: 'auto' },
+              paddingX: '10px',
             }}
           >
             <Stack
@@ -88,7 +81,7 @@ const HomeView = () => {
                 alignItems: { xs: 'center', sm: 'flex-end' },
                 flexDirection: 'row',
                 justifyContent: 'center',
-                gap: '24px'
+                gap: { xs: '12px', sm: '24px' },
               }}
             >
               <div className="icon-factorazy">
@@ -102,26 +95,44 @@ const HomeView = () => {
                   height: { xs: '48px', sm: '54px' },
                 }}
               >
-                <Image
-                  alt="factorazy-log-500"
-                  src="/assets/images/home/logo-500.svg"
-                  fill
-                  // width={94}
-                  // height={53}
-                  quality={100}
-                  priority
-                />
+                <Image alt="factorazy-log-500" src="/assets/images/home/logo-500.svg" fill quality={100} priority />
               </Box>
             </Stack>
-            <Stack direction="row" alignItems="center" pt="18px">
-              <Typography textTransform="uppercase" color="#2DC0AC" fontWeight={400} pr="6px" whiteSpace="nowrap">
-                Green-light
-              </Typography>
-              <Typography textTransform="uppercase" fontWeight={400} whiteSpace="nowrap">
-                your journey to better products!
-              </Typography>
+            <Stack justifyContent="center" direction="row" alignItems="center" pt="18px">
+              {smUp && (
+                <Typography textTransform="uppercase" fontWeight={400} whiteSpace="nowrap">
+                  <Box
+                    component="span"
+                    sx={{
+                      display: 'inline-block',
+                      color: '#2DC0AC',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Green-light
+                  </Box>{' '}
+                  your journey to better products!
+                </Typography>
+              )}
+              {!smUp && (
+                <Typography textTransform="uppercase" fontWeight={400} whiteSpace="nowrap" textAlign="center">
+                  <Box
+                    component="span"
+                    sx={{
+                      display: 'inline-block',
+                      color: '#2DC0AC',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Green-light
+                  </Box>{' '}
+                  your journey <br /> to better products!
+                </Typography>
+              )}
             </Stack>
+            {/* start:  Search Client */}
             <SearchView />
+            {/* end:  Search Client */}
           </Box>
         </Box>
       </Box>
