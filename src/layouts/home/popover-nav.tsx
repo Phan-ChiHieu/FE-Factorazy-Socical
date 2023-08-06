@@ -11,8 +11,6 @@ export default function PopoverNav() {
   const locales = useLocales();
   const { t } = useLocales();
 
-  console.log(locales);
-
   const popover = usePopover();
 
   const handleChangeLang = useCallback(
@@ -32,7 +30,7 @@ export default function PopoverNav() {
           py: 0.5,
           pr: 0.5,
           borderRadius: 1,
-          typography: 'subtitle1',
+          typography: 'subtitle2',
           // bgcolor: 'background.neutral',
           color: '#fff',
           fontWeight: 600,

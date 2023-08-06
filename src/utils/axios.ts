@@ -17,7 +17,6 @@ export default axiosInstance;
 
 export const fetcher = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
-  console.log(config);
 
   const res = await axiosInstance.get(url, { ...config });
 
@@ -32,7 +31,6 @@ export const fetcherHidden = (url: string) => fetch(url).then((r) => r.json());
 
 export const fetcherServer = async (args: string | [string, AxiosRequestConfig]) => {
   const [url, config] = Array.isArray(args) ? args : [args];
-  console.log(config);
 
   const res = await axios.get(url, { ...config });
 

@@ -20,7 +20,7 @@ export default function Header() {
   const HeaderDesktop = () => (
     <>
       <Typography
-        variant="subtitle1"
+        variant="subtitle2"
         component={Link}
         href={TITLE_HEADER.manufacturing.href}
         color="#fff"
@@ -33,7 +33,7 @@ export default function Header() {
       <Stack direction="row" gap="14px">
         <PopoverNav />
         <Typography
-          variant="subtitle1"
+          variant="subtitle2"
           component={Link}
           href={TITLE_HEADER.signIn.href}
           color={theme.palette.factorazy.text.paper}
@@ -52,7 +52,7 @@ export default function Header() {
         </Typography>
 
         <Typography
-          variant="subtitle1"
+          variant="subtitle2"
           component={Link}
           href={TITLE_HEADER.register.href}
           color="#fff"

@@ -23,13 +23,13 @@ export default function Footer() {
         <Stack direction="row" alignItems="center" justifyContent="space-between" width={1}>
           <LoacationView />
           <Stack direction="row" alignItems="center" gap="18px">
-            <Typography component={Link} href="/dashboard" variant="subtitle1">
+            <Typography component={Link} href="/dashboard" variant="subtitle2">
               Terms and Conditions
             </Typography>
-            <Typography component={Link} href="/dashboard" variant="subtitle1">
+            <Typography component={Link} href="/dashboard" variant="subtitle2">
               Privacy Policy
             </Typography>
-            <Typography component={Link} href="/dashboard" variant="subtitle1">
+            <Typography component={Link} href="/dashboard" variant="subtitle2">
               Support
             </Typography>
           </Stack>

@@ -4,7 +4,7 @@ import match from 'autosuggest-highlight/match';
 
 import CameraIcon from '@/assets/icons/camera-icon';
 import SearchIcon from '@/assets/icons/search-icon';
-import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/system/Box';
@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack';
 import { useDebounce } from '@/hooks/use-debounce';
 import { useGetAutoComplete, useGetSuggest } from '@/apis/search-home';
 import Typography from '@mui/material/Typography';
+import Chip from '@mui/material/Chip';
 
 export default function SearchView() {
   const { suggest, suggestLoading } = useGetSuggest();
@@ -22,6 +23,7 @@ export default function SearchView() {
   const debouncedQuery = useDebounce(searchQuery);
   // api khi search tu khoa tra ve array(6)
   const { autoComplete, autoCompleteLoading } = useGetAutoComplete(debouncedQuery);
+  const [valueOption, setValueOption] = useState([]);
 
   const options = suggest?.enterprises?.map((option: any) => {
     return {
@@ -38,12 +40,10 @@ export default function SearchView() {
     if (debouncedQuery) {
       if (event.key === 'Enter') {
         // handleClick(debouncedQuery);
-        console.log('Enter');
+        // console.log('Enter');
       }
     }
   };
-
-  console.log('>>>>>> autoComplete ', autoComplete);
 
   return (
     <>
@@ -70,7 +70,7 @@ export default function SearchView() {
             onInputChange={(event, newValue) => handleSearch(newValue)}
             disabled={suggestLoading}
             loading={suggestLoading}
-            options={options}
+            options={options || []}
             groupBy={(option: any) => option.firstLetter}
             getOptionLabel={(option) => {
               // Value selected with enter, right from the input
@@ -100,6 +100,16 @@ export default function SearchView() {
                 }}
               />
             )}
+            renderOption={(props, option) => {
+              return (
+                <li {...props} key={option.title}>
+                  {option.title}
+                </li>
+              );
+            }}
+            renderTags={(tagValue, getTagProps) => {
+              return tagValue.map((option, index) => <Chip {...getTagProps({ index })} key={option.type} label={option.type} />);
+            }}
           />
         ) : (
           <Autocomplete
