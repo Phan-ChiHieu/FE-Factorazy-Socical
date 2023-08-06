@@ -1,6 +1,5 @@
-
 import HomeView from '@/sections/home';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function pageHome() {
   return <HomeView />;
