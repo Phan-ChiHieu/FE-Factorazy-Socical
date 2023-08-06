@@ -1,17 +1,13 @@
-'use client';
-
-import Box from '@mui/system/Box';
+import Box from '@mui/material/Box';
 import React from 'react';
+import Header from './header/header-zero';
 import Footer from './footer';
-import { useResponsive } from '@/hooks/use-responsive';
-import Header from './header';
 
 type HomeLayoutT = {
   children: React.ReactNode;
 };
 
 export default function HomeLayoutView({ children }: HomeLayoutT) {
-  const smUp = useResponsive('up', 'sm');
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
       <Header />
@@ -23,7 +19,13 @@ export default function HomeLayoutView({ children }: HomeLayoutT) {
       >
         {children}
       </Box>
-      {smUp && <Footer />}
+      <Box
+        sx={{
+          display: { xs: 'none', sm: 'block' },
+        }}
+      >
+        <Footer />
+      </Box>
     </Box>
   );
 }

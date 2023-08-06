@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
@@ -7,8 +6,8 @@ import Link from 'next/link';
 import React from 'react';
 import LoacationView from './location-view';
 
-export default function Footer() {
 
+export default function Footer() {
   return (
     <Box
       component="footer"
@@ -16,7 +15,7 @@ export default function Footer() {
         height: 45,
         display: 'flex',
         alignItems: 'center',
-        borderTop: '1px solid #BEC9C5'
+        borderTop: '1px solid #BEC9C5',
       }}
     >
       <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>

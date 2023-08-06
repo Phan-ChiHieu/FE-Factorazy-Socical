@@ -1,8 +1,8 @@
 import Stack from '@mui/material/Stack';
 import React from 'react';
-import LoacationView from './location-view';
 import IndustryIcon from '@/assets/icons/industry-icon';
 import UserIcon from '@/assets/icons/user-icon';
+import LoacationView from '../../location-view';
 
 export default function HeaderMini() {
   return (

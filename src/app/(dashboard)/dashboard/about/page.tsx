@@ -1,7 +1,8 @@
+import HomeLayoutView from '@/layouts/home'
 import React from 'react'
 
 export default function page() {
   return (
-    <div>page</div>
+    <HomeLayoutView>page</HomeLayoutView>
   )
 }
