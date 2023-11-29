@@ -17,12 +17,12 @@ export const allLangs = [
     systemValue: viVN,
     icon: 'flagpack:vn',
   },
-  {
-    label: 'Chinese',
-    value: 'cn',
-    systemValue: zhCN,
-    icon: 'flagpack:cn',
-  },
+  // {
+  //   label: 'Chinese',
+  //   value: 'cn',
+  //   systemValue: zhCN,
+  //   icon: 'flagpack:cn',
+  // },
   // {
   //   label: 'French',
   //   value: 'fr',
